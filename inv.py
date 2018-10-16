@@ -1,3 +1,5 @@
+import room
+
 class inventory_obj():
 
     def __init__(self):
@@ -22,6 +24,7 @@ class inventory_obj():
         
         if self.full == False:
             self.inv_list.append(item)
+            room.remove(item)
         elif self.full == True:
             print("Your inventory is full!")
 
