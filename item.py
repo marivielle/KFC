@@ -3,4 +3,4 @@ class Item():
         self.name = name
         self.reduce_inv = False
         self.description = description
-        self.id = ID
+        self.id = Id
