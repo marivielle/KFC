@@ -1,9 +1,9 @@
-class room(name):
+class room(name,items,actions):
 
     def __init__(self):
         self.room_name = name
-        self.items = []
-        self.actions []
+        self.items = items
+        self.actions = actions
         self.player_inside = False
 
     def is_item(item_id):
