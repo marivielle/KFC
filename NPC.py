@@ -1,8 +1,9 @@
 import time
 import random
 
+
 class NPC():
-    def __init__(self, trigger_item, speech = ""):
+    def __init__(self, trigger_item, speech = "", name = ""):
         self.name = name
         self.trigger_item = trigger_item
         self.speech = speech
@@ -22,14 +23,18 @@ class NPC():
         #20% of the time 30 - 40
         #30 % of the time 20 - 30
         #40 % of the time 10 - 20
+        if self.health <= 5:
+            print("but they're too injured")
+            return 0
+        else:
+            damage_dealt = random.randint(10,50)
 
-        damage_dealt = random.randint(10,50)
-
-        return damage_dealt
+            return damage_dealt
 
     def decide_action(self, player_inv):
-        if trigger_item in player_inv:
+        if self.trigger_item in player_inv:
             self.deliver_speech()
+            return 0
         else:
-            self.attack()
-
+            damage = self.attack()
+            return damage
