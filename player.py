@@ -19,6 +19,11 @@ class player():
         
         print("Player Health: " + self.health)
 
+    def death(self):
+        if self.health <= 0:
+            self.alive = False
+            print("Bit of an issue.. you are dead") #Place holder for a more interesting death message
+            return self.alive
     
 
     def attack(self, weapon, attacker):
