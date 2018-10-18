@@ -31,6 +31,7 @@ class player():
             
             print("You hit " + NPC.name + " with " + weapon +
                   " for " + firsts_dmg + "damage!")
+            return fists_dmg
         
         elif weapon in weak_weapons:
             weak_dmg = random.randrange(0, 2)
