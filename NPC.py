@@ -2,9 +2,11 @@ import time
 import random
 
 class NPC():
-    def __init__(self, trigger_item, speech):
+    def __init__(self, trigger_item, speech = ""):
+        self.name = name
         self.trigger_item = trigger_item
         self.speech = speech
+        self.health = 20
 
     def deliver_speech(self):
         print("\nThe patient runs towards you intent on attacking you")
