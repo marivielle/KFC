@@ -1,4 +1,5 @@
 import time
+import random
 
 class NPC():
     def __init__(self, trigger_item, speech):
@@ -15,7 +16,14 @@ class NPC():
 
     def attack(self):
         print("\nThe patient runs towards you intent on attacking you")
+        #10% of the time 40-60 damage
+        #20% of the time 30 - 40
+        #30 % of the time 20 - 30
+        #40 % of the time 10 - 20
 
+        damage_dealt = random.randint(10,50)
+
+        return damage_dealt
 
     def decide_action(self, player_inv):
         if trigger_item in player_inv:
