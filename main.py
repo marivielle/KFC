@@ -1,5 +1,7 @@
 from room import *
 from item import item
+from player import *
+from parser import *
 
 class game():
 
@@ -8,6 +10,7 @@ class game():
         self.current_room = None
         self.rooms = []
         self.player = Player()
+        self.parser = parser()
 
 
     def generate_rooms_items(self):
@@ -55,9 +58,40 @@ class game():
             else:
                 print("Such a room does not exist. ")
 
+    def sense_route_one(self,strings):
+        found = False
+
+        for n in range(0,len(strings)-1):
+            if strings[n] in current_room.travel:
+                found = True
+                    
+        if not found:
+            for i in range(0,len(strings)-1):
+                current = strings[i]+" "+strings[i+1]
+                if current in current_room.travel:
+                    found = True
+
+        return found
+
+        
+
+    def sense_route_two(self):
+
+    def sense_item(self):
 
 
     def check_availability(self,string):
+        check_one = self.parser.sense_travel(string)
+        check_two = False
+        if check_one:
+            
+            
+            
+        else:
+            check_two = self.parser.sense_action(string)
+
+        if not check_one and not check_two:
+            print("Command cannot be excecuted due to lack of options: ")
 
 
         
