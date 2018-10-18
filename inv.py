@@ -1,4 +1,4 @@
-import room
+from room import *
 
 class inventory_obj():
 
