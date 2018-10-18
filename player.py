@@ -25,31 +25,37 @@ class player():
         weak_weapons = ["id card", "toilet brush", "bandage", "toothpaste", "newspaper"]
         medium_weapons = ["rock", "mop", "sunflower"]
         strong_weapons = ["large log", "drain unblocker"]
-        
-        if weapon == "fists":
-            fists_dmg = random.randrange(0.5, 4)
+        if weapon in self.inv:
             
-            print("You hit " + attacker.name + " with " + weapon +
-                  " for " + str(firsts_dmg) + " damage!")
-            return fists_dmg
-        
-        elif weapon in weak_weapons:
-            weak_dmg = random.randrange(0, 2)
-            print("You hit " + attacker.name + " with " + weapon +
-                  " for " + str(weak_dmg) + " damage!")
-            return weak_dmg
-            
-        elif weapon in medium_weapons:
-            med_dmg = random.randrange(3, 6)
-            print("You hit " + attacker.name + " with " + weapon +
-                  " for " + str(med_dmg) + " damage!")
-            return med_dmg
+            if weapon == "fists":
+                fists_dmg = random.randrange(0.5, 4)
 
-        elif weapon in strong_weapons:
-            strong_dmg = random.randrange(7, 10)
-            
-            print("You hit " + attacker.name + " with " + weapon +
-                  " for " + str(strong_dmg) + " damage!")
-            
-            return strong_dmg
+                print("You hit " + attacker.name + " with " + weapon +
+                      " for " + str(firsts_dmg) + " damage!")
+                
+                return fists_dmg
+
+            elif weapon in weak_weapons:
+                weak_dmg = random.randrange(0, 2)
+                
+                print("You hit " + attacker.name + " with " + weapon +
+                      " for " + str(weak_dmg) + " damage!")
+                
+                return weak_dmg
+
+            elif weapon in medium_weapons:
+                med_dmg = random.randrange(3, 6)
+                
+                print("You hit " + attacker.name + " with " + weapon +
+                      " for " + str(med_dmg) + " damage!")
+                
+                return med_dmg
+
+            elif weapon in strong_weapons:
+                strong_dmg = random.randrange(7, 10)
+
+                print("You hit " + attacker.name + " with " + weapon +
+                      " for " + str(strong_dmg) + " damage!")
+
+                return strong_dmg
 
