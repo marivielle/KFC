@@ -1,5 +1,5 @@
 from room import *
-from item import item
+from item import Item as item
 from player import *
 from parser import *
 
@@ -9,7 +9,7 @@ class game():
         self.win = False
         self.current_room = None
         self.rooms = []
-        self.player = Player()
+        self.player = player()
         self.parser = parser()
 
 
@@ -76,14 +76,33 @@ class game():
         
 
     def sense_route_two(self):
+        pass
 
-    def sense_item(self):
+    def sense_item(self, user_input):
+        room_items = self.current_room.items
+
+        found = False
+
+        for n in range(0,len(user_input)-1):
+            for m in range(0, len(room_items)):
+                if user_input[n] == room_items[m].name:
+                    found = True
+                    
+        if not found:
+            for i in range(0,len(user_input)-1):
+                current = user_input[i]+" " + user_input[i+1]
+                for j in range(0, len(room_items)):
+                    if current == room_items[j]:
+                        found = True
+
+        return found
 
 
     def check_availability(self,string):
         check_one = self.parser.sense_travel(string)
         check_two = False
         if check_one:
+            pass
             
             
             
@@ -97,3 +116,6 @@ class game():
         
 
     def main(self):
+        pass
+
+
