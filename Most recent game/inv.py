@@ -14,15 +14,6 @@ class inventory_obj():
         if len(self.inv_list) >= self.capacity: 
             self.full = True
 
-    def create_semantic_list(self):
-        try:
-            for n in self.inv_list:
-                self.sem_list.append(n.name)
-        except:
-            None
-            
-        return self.sem_list
-
 
     def add_item(self, item, room):
         """Adds an item to the inv list IF the inventory is NOT full"""
@@ -33,7 +24,6 @@ class inventory_obj():
         if self.full == False:
             self.inv_list.append(item)
             room.remove_item(item)
-            print("Item aquired")
         
         elif self.full == True:
             print("Your inventory is full!")

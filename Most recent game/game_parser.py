@@ -1,12 +1,12 @@
 import string
-from words import return_words
+
 
 class parser:
 
     def __init__(self):
         self.directions = ["go","travel","enter","head"]
-        self.actions = ["pick","grab","take","place","open","break"]
-        self.skip_words = return_words()
+        self.actions = ["pick","grab","take","get","aqcuire","capture"]
+        self.drop_actions = ["drop","remove"]
 
     def remove_punct(self,text):
 
@@ -45,6 +45,9 @@ class parser:
 
     def sense_actions(self,string):
         return self.sense_all(string,self.actions)
+
+    def sense_drop(self,string):
+        return self.sense_all(string,self.drop_actions)
 
 
         

@@ -146,7 +146,7 @@ class game:
     def sense_key(self, string,direction):
         found = False
         key = ""
-        sem_list = self.player.inv_obj.create_semantic_list()
+        sem_list = self.player.inv_obj.inv_items
         for n in string:
             if n in sem_list:
                 for m in range(0,len(inventory)-1):
@@ -168,7 +168,7 @@ class game:
         return key
         
 
-    def is_item(self, user_input):
+    def is_item_room(self, user_input):
         room_items = self.current_room.items
         item = ""
         found = False
@@ -189,26 +189,45 @@ class game:
         return found,item
 
 
+    def is_item_inventory(self, user_input):
+
+        inv_items = self.player.inv_obj.inv_list
+        item = ""
+        found = False
+        for n in range(0,len(user_input)):
+            if user_input[n] in inv_items:
+                found = True
+                item = user_input[n]
+                    
+        if not found:
+            for i in range(0,len(user_input)-1):
+                current = user_input[i]+" " + user_input[i+1]
+                if current in inv_items:
+                    found = True
+                    item = current
+
+        return found,item
+
+
 
     def check_availability(self,string):
         key_found = False
         key_index = 0
         travel_check,string = self.parser.sense_travel(string)
-        
+
+
         if travel_check:
-            #print("Travel Check")
+
             direction_check,room = self.sense_route_one(string)
             
             if direction_check:
-                #print("direction Check")
-                #print(room)
+
                 travel_option_check,direction = self.sense_route_two(string,room)
                 
                 if travel_option_check:
-                    #print("travel option check")
-                    #print(self.current_room.entrances)
+
                     if self.current_room.entrances[self.cap_string(direction)]:
-                        #print("door locked check")
+
                         
                         key = self.sense_key(string,self.cap_string(direction))
                         
@@ -227,13 +246,27 @@ class game:
             action_check = self.parser.sense_actions(string)
             if action_check:
                 
-                item_check,current_item = self.is_item(string)
+                item_check,current_item = self.is_item_room(string)
                 if item_check:
                     self.player.inv_obj.add_item(current_item,self.current_room)
+                    print()
+                    print()
+                    print("You have now aqcuired " + str(current_item))
+
+            else:
+                drop_action_check = self.parser.sense_drop(string)
+                if drop_action_check:
+                    drop_item_check,current_item = self.is_item_inventory(string)
+                    if drop_item_check:
+                        print()
+                        print()
+                        print("You no longer have the item " + str(current_item) + "")
+
+                
                     
                     
 
-        if not travel_check and not action_check:
+        if not travel_check and not action_check and not drop_action_check:
             print("Command cannot be excecuted due to lack of options: ")
 
 
