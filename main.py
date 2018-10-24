@@ -345,13 +345,7 @@ class game:
         if not found:
             print("Item cannot be inspected")
 
-    def check_endgame(self):
-        endgame_item_id = ["sl1", "mp1"]
-        for item in endgame_item_id:
-            #for inv_item in self.player.inv
-            pass
-
-        
+            
 
     def main(self):
         show_logo(), os.system('cls')
