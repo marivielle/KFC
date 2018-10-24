@@ -11,11 +11,17 @@ class game:
         self.rooms = []
         self.player = player()
         self.parser = parser()
-        self.item_key_unlocks = {"id1":[("Courtytard",["Front door"]),
-                                        ("Reception",["Door"])],
+        self.item_key_unlocks = {"id1":[("Courtyard",["Front door"]),
+                                        ("Reception",["Door"]),
+                                        ("Waiting room",["Door","Door"])],
                                  "rk1":[("Courtyard",["Window"])],
                                  "lg1":[("Courtyard",["Window"])],
                                  "sr1":[("Storage closet",["Door"])]}
+
+        self.item_keys = {"id card":"id1","rock":"rk1","screwdriver":"sr1"}
+
+        
+        
 
 
     def generate_rooms_items(self):
@@ -29,12 +35,20 @@ class game:
                                 {"Reception":["Front door","Window"]},
                                 {"Front door": True,"Window": True},
                                 {"Front door":"id1","Window":["rk1","lg1"]}))
+
+        self.rooms.append(room("Waiting room",
+                               [item("Flashlight","ft1")],
+                                ["Reception","Storage closet"],
+                                {"Reception":["Door"],"Storage closet":["Door"]},
+                                {"Door": True,"Door":True},
+                                {"Door":["id1","sr1"]}))
+
+        
         
         self.rooms.append(room("Reception",
-                               [item("Screwdriver","sr1"),
-                                item("Flashlight","ft1")],
-                                ["Waiting room","Storage closet"],
-                                {"Waiting room":["Door"],"Storage closet":["Door"]},
+                               [item("Screwdriver","sr1")],
+                                ["Waiting room","Toilet"],
+                                {"Waiting room":["Door"],"Toilet":["Door"]},
                                 {"Door": True,"Door":True},
                                 {"Door":["id1","sr1"]}))
         
@@ -47,7 +61,7 @@ class game:
                                 {"Door":False},
                                 {}))
         
-        self.rooms.append(room("Storage Closet",
+        self.rooms.append(room("Storage closet",
                                [item("Mop","mp1"),
                                 item("Drain Unblocker","dr1"),
                                 item("Newspaper","nr1")],
@@ -70,7 +84,7 @@ class game:
     def return_room_object(self,room_name):
         val = False
         for n in self.rooms:
-            if self.cap_string(room_name) == n.name:
+            if room_name == n.name.lower():
                 val = n
 
         return val
@@ -148,22 +162,26 @@ class game:
         key = ""
         sem_list = self.player.inv_obj.inv_list
         
-        for m in range(0,len(sem_list)-1):
-            key = self.current_room.return_item_id(sem_list[m])
-            print(key)
-            unlocks = self.item_key_unlocks[key]
-            
-            for i in unlocks:
-                print(i[0], self.cap_string(self.current_room.name))
-                if i[0] == self.cap_string(self.current_room.name):
-                    print(self.cap_string(direction),i[1])
-                    if self.cap_string(direction) in i[1]:
-                        found = True
+        for m in range(0,len(sem_list)):
+            try:
+                key = self.item_keys[sem_list[m]]
+                print(key)
+                unlocks = self.item_key_unlocks[key]
+                
+                for i in unlocks:
+                    print(i[0],self.cap_string(self.current_room.name))
+                    if i[0] == self.cap_string(self.current_room.name):
+                        print(self.cap_string(direction),i[1])
+                        if self.cap_string(direction) in i[1]:
+                            found = True
+                            
+            except KeyError:
+                print("You cannot use that to open this door! ")
                                 
                         
 
 
-        return key
+        return key,found
         
 
     def is_item_room(self, user_input):
@@ -227,12 +245,12 @@ class game:
                     
                     if self.current_room.entrances[self.cap_string(direction)]:
                         
-                        key = self.sense_key(string,self.cap_string(direction))
-                        print(key)
-                        if key in self.current_room.actions[direction]:
-                            print("working !!")
-                            self.move_player(room)
-                            
+                        key,found = self.sense_key(string,self.cap_string(direction))
+                        if found:
+                            if key in self.current_room.actions[direction]:
+                                
+                                self.move_player(room)
+                                
                         else:
                             print()
                             print("You do not have the required items to open this passway -- ")
