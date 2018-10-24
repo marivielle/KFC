@@ -1,6 +1,6 @@
 class room:
 
-    def __init__(self,room_name,items,travel,travel_options,entrances = {},actions = [], description = ""):
+    def __init__(self,room_name,items,travel,travel_options,entrances = {},actions = []):
         self.name = room_name
         self.items = items
         self.actions = actions
@@ -8,8 +8,17 @@ class room:
         self.travel_options = travel_options
         self.player_inside = False
         self.entrances = entrances
-        self.description = description
 
+    def return_item_id(self,name):
+        print(self.items,name)
+        for item in self.items:
+            print(item.name,name)
+            if item.name.lower() == name.lower():
+                m = item.id
+                return m
+           
+        
+        
 
     def is_item(self,item_id):
         for item in self.items:
