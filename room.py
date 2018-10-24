@@ -1,25 +1,33 @@
-class room(name,items,actions):
+class room:
 
-    def __init__(self):
-        self.room_name = name
+    def __init__(self,room_name,items,travel,travel_options,entrances = {},actions = [], description = ""):
+        self.name = room_name
         self.items = items
         self.actions = actions
+        self.travel = travel
+        self.travel_options = travel_options
         self.player_inside = False
+        self.entrances = entrances
+        self.description = description
 
-    def is_item(item_id):
+
+    def is_item(self,item_id):
         for item in self.items:
             if item.item_id == item_id:
                 return True
             else:
                 return False
 
-    def add_item(item):
+    def add_item(self,item):
         self.items.append(item)
 
-    def remove_item(item):
-        self.items.remove(item)
+    def remove_item(self,item):
+        for i in self.items:
+            if i.name == item:
+                self.items.remove(i)
 
-    def check_action(action,item=None):
+
+    def check_action(self,action,item=None):
         if item != None:
             
             for item_unit in self.items:
