@@ -2,6 +2,8 @@ from room import *
 from game_item import *
 from player import *
 from game_parser import parser
+from logo import show_logo, fancy_output
+import os
 
 class game:
 
@@ -343,11 +345,18 @@ class game:
         if not found:
             print("Item cannot be inspected")
 
+    def check_endgame(self):
+        endgame_item_id = ["sl1", "mp1"]
+        for item in endgame_item_id:
+            #for inv_item in self.player.inv
+            pass
+
         
 
     def main(self):
+        show_logo(), os.system('cls')
         self.generate_rooms_items()
-        print("""You direct the car left to join the windy dirt track that will take you to the isolated hills of ##.\nThe silence and stillness becomes disturbed by the rattling and banging of your beaten car.\nDespite the painful noise of your car dying you put your foot down, racing up the track.\nSeconds later you arrive at the ##. You speed into the car park and skid to a halt, causing the car to finally cut out.""")
+        fancy_output("""\nYou direct the car left to join the windy dirt track that will take you to the isolated hills of ##.\nThe silence and stillness becomes disturbed by the rattling and banging of your beaten car.\nDespite the painful noise of your car dying you put your foot down, racing up the track.\nSeconds later you arrive at the ##. You speed into the car park and skid to a halt, causing the car to finally cut out.""")
         while True:
             print()
             print()
