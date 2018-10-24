@@ -35,8 +35,8 @@ class game:
                                 item("Flashlight","ft1")],
                                 ["Waiting room","Storage closet"],
                                 {"Waiting room":["Door"],"Storage closet":["Door"]},
-                                {"Waiting door": True,"Storage door":True},
-                                {"Waiting door":"id1","Storage door":["id1","sr1"]}))
+                                {"Door": True,"Door":True},
+                                {"Door":["id1","sr1"]}))
         
         self.rooms.append(room("Toilet",
                                [item("Toilet Brush","th1"),
@@ -91,7 +91,7 @@ class game:
         room = ""
 
         for n in range(0,len(strings)):
-            #print(strings[n],self.current_room.travel)
+            
             for m in self.current_room.travel:
                 if strings[n] == m.lower():
                     found = True
@@ -99,15 +99,14 @@ class game:
                     
         if not found:
             for i in range(0,len(strings)-1):
-                try:
-                    current = strings[i]+" "+strings[i+1]
-                    if current in self.current_room.travel:
-                        found = True
-                        room = strings[i]+" "+strings[i+1]
-                except IndexError:
-                    continue
 
-        
+                
+                current = self.cap_string(strings[i])+" "+strings[i+1]
+                print(current,self.current_room.travel)
+                if current in self.current_room.travel:
+                    found = True
+                    room = strings[i]+" "+strings[i+1]
+
         return found,room
 
     def cap_string(self,string):
@@ -127,26 +126,27 @@ class game:
         direction_travel  = ""
         direction = self.cap_string(direction)
         for n in range(0,len(strings)):
-            if strings[n] in self.current_room.travel_options[direction]:
+            print(self.cap_string(strings[n]) + "   "  +str(self.current_room.travel_options[direction]))
+            if self.cap_string(strings[n]) in self.current_room.travel_options[direction]:
                 found = True
                 direction_travel = strings[n]
         
         if not found:
             for i in range(0,len(strings)-1):
-                try:
-                    current = self.cap_string(strings[i])+" "+strings[i+1]
-                    if current in self.current_room.travel_options[direction]:
-                        found = self.cap_string(strings[i])+" "+strings[i+1]
-                        direction_travel = current
-                except IndexError:
-                    continue
+                
+                current = self.cap_string(strings[i])+" "+strings[i+1]
+                print(current,self.current_room.travel_options[direction])
+                if current in self.current_room.travel_options[direction]:
+                    found = True
+                    direction_travel = current
+            
 
         return found,direction_travel
 
     def sense_key(self, string,direction):
         found = False
         key = ""
-        sem_list = self.player.inv_obj.inv_items
+        sem_list = self.player.inv_obj.inv_list
         for n in string:
             if n in sem_list:
                 for m in range(0,len(inventory)-1):
@@ -214,18 +214,21 @@ class game:
         key_found = False
         key_index = 0
         travel_check,string = self.parser.sense_travel(string)
-
-
+        print()
+        print('@@@@')
+        print(travel_check)
+        print('@@@@')
+        print()
         if travel_check:
 
             direction_check,room = self.sense_route_one(string)
-            
+            print(room)
             if direction_check:
 
                 travel_option_check,direction = self.sense_route_two(string,room)
-                
+                direction = self.cap_string(direction)
                 if travel_option_check:
-
+                    
                     if self.current_room.entrances[self.cap_string(direction)]:
 
                         
@@ -240,6 +243,8 @@ class game:
                     else:
                         print("Enter room!")
                         self.move_player(room)
+
+                    
 
             
         else:
