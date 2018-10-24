@@ -22,47 +22,71 @@ class game:
 
         
         self.rooms.append(room("Courtyard",
-                               [item("Rock","rk1"),
-                                item("ID Card","id1"),
-                                item("Large Log","lg1")],
+                               [item("Rock","rk1", "A big, mossy log. You can barely carry it"),
+                                item("ID Card","id1", "An ID card, its a bit bent and the picture is faded, but you can see the words \"Researcher\" and \"Access\" on it."),
+                                item("Large Log","lg1", "A big, mossy log. You can barely carry it")],
                                 ["Reception"],
                                 {"Reception":["Front door","Window"]},
                                 {"Front door": True,"Window": True},
-                                {"Front door":"id1","Window":["rk1","lg1"]}))
+                                {"Front door":"id1","Window":["rk1","lg1"]},
+                               """You scope out your location. Seeing the signs of decay all around, you gather that ##
+                                has been abandoned, or maybe severely neglected, for quite some time.
+
+                                Prepared to run if necessary, you start to look around for potential threats and items that may
+                                be useful. You see a group of old decaying cars, which have broken windows and open doors. You can spot an open waste bin further along"""))
         
         self.rooms.append(room("Reception",
-                               [item("Screwdriver","sr1"),
-                                item("Flashlight","ft1")],
+                               [item("Screwdriver","sr1", "You find an old rusty screwdriver, with a blunt end like it’s been used to puncture something"),
+                                item("Flashlight","ft1", "A heavy black flash light that is flickering on and off"),
+                                item("Kirill's Birth Certificate", "ke1", "You can see a dusty birth certificate torn apart, as you inspect further you notice the name Sidorov on the top.")],
                                 ["Waiting room","Storage closet"],
                                 {"Waiting room":["Door"],"Storage closet":["Door"]},
-                                {"Door": True,"Door":True},
-                                {"Door":["id1","sr1"]}))
+                                {"Waiting door": True,"Storage door":True},
+                                {"Waiting door":"id1","Storage door":["id1","sr1"]},
+                               """Entering the room, you are greeted with dizzyingly awful stench and a feeling of dread.
+                                You barely make out the words “Welcome to ##" on a worn out sign located above a dusty wooden counter covered in
+                                old leaflets and ripped paper. Time has made sure the writing is illegible. The sound of dripping distracts you
+                                and looking towards the source reveals a puddle of dark water in the far corner of the room, the smell
+                                emanating from there making you gag. You stay away from it.
+
+                                You spot all the open drawers behind the desk, as if someone had left in a hurry. Looking around, you see an old
+                                backpack hanging from the coat hook."""))
         
         self.rooms.append(room("Toilet",
-                               [item("Toilet Brush","th1"),
-                                item("Bandage","be1"),
-                                item("Toothpaste","te1")],
+                               [item("Toilet Brush","th1", "A dirty yellow toilet brush propped up against the toilet in a cracked holder."),
+                                item("Bandage","be1", "An unused bandage is found in an open first aid box that is spilled onto the floor."),
+                                item("Toothpaste","te1", "An old and half-filled tube of toothpaste. Minty.")],
                                 ["Reception"],
                                 {"Reception":["Door"]},
                                 {"Door":False},
-                                {}))
+                                {},
+                               """Going from one awfully smelling room to another, the smell of old, unflushed excrement
+                                assault your nostrils. The damp, moldy walls make you cover your nose and mouth to prevent
+                                ingesting anything permeating from them. You look down to see a cracked toilet fading into the vegetation
+                                growing through the walls. A shine catches your eye, you spot that there is a broken mirror above
+                                the sink. 
+                                """))
         
         self.rooms.append(room("Storage Closet",
-                               [item("Mop","mp1"),
-                                item("Drain Unblocker","dr1"),
-                                item("Newspaper","nr1")],
+                               [item("Mop","mp1", "A mop. A very wet and stinky mop."),
+                                item("Drain Unblocker","dr1", "On the top shelf you find a sealed bottle of drain unblocker"),
+                                item("Newspaper","nr1", "A faded yellow newspaper, with water stains ruining the text")],
                                 ["Waiting room"],
                                 {"Waiting room":["Door"]},
                                 {"Door":True},
-                                {"Door":"sr1"}))
+                                {"Door":"sr1"}
+                               ))
         
         
         self.rooms.append(room("Hallway",
-                               [item("Sunflower Kirill","sl1")],
+                               [item("Sunflower Kirill","sl1", "What looks like a normal sundeprived sunflower, you actually discover to be a flower made of Kirill faces")],
                                [None],
-                               {None:[None]}))
+                               {None:[None]},
+                               """You see a long cold corridor with hard oak floor and dark wallpapered walls. You step forwards
+                                and the floor begins to creek.
+                                """))
 
-        
+                
         
         self.current_room = self.rooms[0]
 
@@ -275,10 +299,37 @@ class game:
             print("Command cannot be excecuted due to lack of options: ")
 
 
+    def inspect_object(self, user_input):
+        inspect_words = ["inspect", "investigate", "look", "search"]
+        inspect = False
+        item_found = False
+
+        for word in inspect_words:
+            if word in user_input.lower():
+                inspect = True
+                break
+
+        if inspect == True:
+            for item in self.current_room.items:
+                if item.name.lower() in user.input.lower():
+                    print(item.description)
+                    item_found = True
+                    break
+
+            if item_found == False:
+                for room in self.current_room.travel:
+                    for exit_option in self.current_room.travel_options[room]:
+                        if exit_option.lower() in user_input.lower():
+                            print(self.current_room.description)
         
 
     def main(self):
         self.generate_rooms_items()
+        print("""You direct the car left to join the windy dirt track that will take you to the isolated hills of ##.
+                The silence and stillness becomes disturbed by the rattling and banging of your beaten car.
+                Despite the painful noise of your car dying you put your foot down, racing up the track.
+                Seconds later you arrive at the ##. You speed into the car park and skid to a halt, causing
+                the car to finally cut out.""")
         while True:
             print()
             print()
