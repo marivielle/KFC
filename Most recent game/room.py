@@ -1,6 +1,6 @@
 class room:
 
-    def __init__(self,room_name,items,travel,travel_options,entrances = {},actions = []):
+    def __init__(self,room_name,items,travel,travel_options,entrances = {},actions = [], description = ""):
         self.name = room_name
         self.items = items
         self.actions = actions
@@ -8,6 +8,7 @@ class room:
         self.travel_options = travel_options
         self.player_inside = False
         self.entrances = entrances
+        self.description = description
 
 
     def is_item(self,item_id):
