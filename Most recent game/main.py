@@ -29,9 +29,7 @@ class game:
                                 {"Reception":["Front door","Window"]},
                                 {"Front door": True,"Window": True},
                                 {"Front door":"id1","Window":["rk1","lg1"]},
-                               """You scope out your location. Seeing the signs of decay all around, you gather that ## has been abandoned, or maybe severly neglected, for quite some time.
-
-                                Prepared to run if necessary. you start to look around for potential threats and items that may be useful. You see a group of old decaying cars, which have broken windows and open doors. You can spot an open waste bin further along"""))
+                               "You scope out your location. Seeing the signs of decay all around, you gather that ## has been abandoned, or maybe severly neglected, for quite some time.\nPrepared to run if necessary. you start to look around for potential threats and items that may be useful. You see a group of old decaying cars, which have broken windows and open doors. You can spot an open waste bin further along"))
         
         self.rooms.append(room("Reception",
                                [item("Screwdriver","sr1"),
@@ -40,9 +38,7 @@ class game:
                                 {"Waiting room":["Door"],"Storage closet":["Door"]},
                                 {"Waiting door": True,"Storage door":True},
                                 {"Waiting door":"id1","Storage door":["id1","sr1"]},
-                               """Entering the room, you are greeted with dizzyingly awful stench and a feeling of dread. You barely make out the words “Welcome to ##" on a worn out sign located above a dusty wooden counter covered in old leaflets and ripped paper. Time has made sure the writing is illegible. The sound of dripping distracts emanating from there making you gag. You stay away from it.
-
-                                You spot all the open drawers behind the desk, as if someone had left in a hurry. Looking around, you see an old backpack hanging from the coat hook."""))
+                               "Entering the room, you are greeted with dizzyingly awful stench and a feeling of dread. You barely make out the words \"Welcome to ##\" on a worn out sign located above a dusty wooden counter covered in old leaflets and ripped paper. Time has made sure the writing is illegible. The sound of dripping distracts emanating from there making you gag. You stay away from it.\nYou spot all the open drawers behind the desk, as if someone had left in a hurry. Looking around, you see an old backpack hanging from the coat hook."))
         
         self.rooms.append(room("Toilet",
                                [item("Toilet Brush","th1"),
@@ -52,8 +48,7 @@ class game:
                                 {"Reception":["Door"]},
                                 {"Door":False},
                                 {},
-                               """Going from one awfully smelling room to another, the smell of old, unflushed excrement assault your nostrils. The damp, moldy walls make you cover your nose and mouth to prevent ingesting anything permeating from them. You look down to see a cracked toilet fading into the vegetation growing through the walls. A shine catches your eye, you spot that there is a broken mirror above the sink. 
-                                """))
+                               "Going from one awfully smelling room to another, the smell of old, unflushed excrement assault your nostrils. The damp, moldy walls make you cover your nose and mouth to prevent ingesting anything permeating from them. You look down to see a cracked toilet fading into the vegetation growing through the walls. A shine catches your eye, you spot that there is a broken mirror above the sink."))
         
         self.rooms.append(room("Storage Closet",
                                [item("Mop","mp1"),
@@ -274,7 +269,7 @@ class game:
         
     def main(self):
         self.generate_rooms_items()
-        print("""You direct the car left to join the windy dirt track that will take you to the isolated hills of ##. The silence and stillness becomes disturbed by the rattling and banging of your beaten car. Despite the painful noise of your car dying you put your foot down, racing up the track. Seconds later you arrive at the ##. You speed into the car park and skid to a halt, causing the car to finally cut out.""")
+        print("You direct the car left to join the windy dirt track that will take you to the isolated hills of ##. The silence and stillness becomes disturbed by the rattling and banging of your beaten car. Despite the painful noise of your car dying you put your foot down, racing up the track. Seconds later you arrive at the ##. You speed into the car park and skid to a halt, causing the car to finally cut out.")
         while True:
             print()
             print()
