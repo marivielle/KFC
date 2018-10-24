@@ -10,6 +10,16 @@ class room:
         self.entrances = entrances
         self.description = description
 
+    def return_item_id(self,name):
+        print(self.items,name)
+        for item in self.items:
+            print(item.name,name)
+            if item.name.lower() == name.lower():
+                m = item.id
+                return m
+           
+        
+        
 
     def is_item(self,item_id):
         for item in self.items:
