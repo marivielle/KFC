@@ -676,7 +676,7 @@ class game:
     def main(self):
         show_logo(), os.system('cls')
         self.generate_rooms_items()
-        print("""\nYou direct the car left to join the windy dirt track that will take you to the isolated hills of ##.
+        fancy_output("""\nYou direct the car left to join the windy dirt track that will take you to the isolated hills of ##.
 The silence and stillness becomes disturbed by the rattling and banging of your beaten car.
 Despite the painful noise of your car dying you put your foot down, racing up the track.
 Seconds later you arrive at the ##. You speed into the car park and skid to a halt, causing the car to finally cut out.\n\n""")
